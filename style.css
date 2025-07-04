@@ -1,9 +1,11 @@
+/* Base styles */
 body {
   font-family: Arial, sans-serif;
   background: #FFF9F0;
   margin: 0;
   padding: 20px;
   color: #212121;
+  transition: background 0.5s, color 0.5s;
 }
 
 .container {
@@ -11,30 +13,58 @@ body {
   margin: auto;
   background: #FFFFFF;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: background 0.5s, box-shadow 0.5s;
 }
 
+h1 {
+  text-align: center;
+  color: #E64A19;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+  transition: color 0.5s;
+}
+
+/* Tabs */
 .tabs {
   display: flex;
-  margin-bottom: 12px;
-  border-radius: 8px;
+  margin-bottom: 16px;
+  border-radius: 12px;
   overflow: hidden;
+  border: 2px solid #FF9800;
 }
 
 .tab-button {
   flex: 1;
-  padding: 12px;
+  padding: 14px;
   cursor: pointer;
   background: #FFCA28;
   border: none;
   font-size: 16px;
   color: #212121;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  border-right: 1px solid #FF9800;
+  position: relative;
+  border-radius: 0;
+}
+
+.tab-button:last-child {
+  border-right: none;
+}
+
+/* Add icons via pseudo-elements */
+.tab-button[data-tab="school"]::before {
+  content: "🚌 ";
+}
+
+.tab-button[data-tab="home"]::before {
+  content: "🏠 ";
 }
 
 .tab-button:hover {
   background: #FFC107;
+  transform: scale(1.02);
 }
 
 .tab-button.active {
@@ -43,21 +73,92 @@ body {
   font-weight: bold;
 }
 
+/* Tab content */
 .tab-content {
   display: none;
-  padding: 10px 0;
+  padding: 20px 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.5s;
 }
 
 .tab-content.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab-content p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FF5722;
+  margin-bottom: 12px;
+  transition: color 0.5s;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
-  padding: 8px 0;
+  padding: 12px;
   border-bottom: 1px solid #FF9800;
+  transition: background 0.3s, padding 0.2s;
+  border-radius: 8px;
+}
+
+li:hover {
+  background: #FFF3E0;
+  cursor: pointer;
+  padding-left: 16px;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #2E1B12;
+    color: #F5F5F5;
+  }
+
+  .container {
+    background: #3E2723;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  }
+
+  h1 {
+    color: #FFCCBC;
+  }
+
+  .tabs {
+    border-color: #FF8A65;
+  }
+
+  .tab-button {
+    background: #FF7043;
+    color: #F5F5F5;
+    border-right: 1px solid #FF8A65;
+  }
+
+  .tab-button:hover {
+    background: #FF8A65;
+  }
+
+  .tab-button.active {
+    background: #D84315;
+    color: #FFFFFF;
+  }
+
+  .tab-content p {
+    color: #FFAB91;
+  }
+
+  li {
+    border-bottom: 1px solid #FF8A65;
+  }
+
+  li:hover {
+    background: #4E342E;
+  }
 }
