@@ -86,6 +86,10 @@ setInterval(() => {
 
 	
 function updateCountdowns() {
+
+  const activeTab = document.querySelector(".tab-content.active");
+  if (!activeTab) return;
+
   const counters = document.querySelectorAll(".timeCounter");
 
   counters.forEach(counter => {
@@ -96,18 +100,25 @@ function updateCountdowns() {
       seconds -= 1;
       counter.textContent = seconds;
 
-      // Change background color based on time left
-      if (seconds < 60) {
-        counter.style.backgroundColor = "#ff4d4d"; // red
-      } else if (seconds < 180) {
-        counter.style.backgroundColor = "#ffa500"; // orange
+      // Update background color class
+      counter.classList.remove("urgent", "soon", "later");
+      if (seconds <= 60) {
+        counter.classList.add("urgent");
+      } else if (seconds <= 180) {
+        counter.classList.add("soon");
       } else {
-        counter.style.backgroundColor = "#90ee90"; // light green
+        counter.classList.add("later");
+      }
+
+      // 🔔 Play bell at exactly 60 seconds
+      if (seconds === 60 && !counter.dataset.bellPlayed) {
+        playBell();
+        counter.dataset.bellPlayed = "true"; // mark as played
       }
 
     } else {
       counter.textContent = "Departed";
-      counter.style.backgroundColor = "#d3d3d3"; // grey
+      counter.classList.remove("urgent", "soon", "later");
     }
   });
   
@@ -121,6 +132,16 @@ function updateCountdowns() {
 	var timeString = hours + ":" + minutes + ":" + seconds;
 	document.getElementById("liveTime").innerHTML = timeString;
 }
+
+
+function playBell() {
+  const bell = document.getElementById("bellSound");
+  if (bell) {
+    bell.currentTime = 0;
+    bell.play();
+  }
+}
+
 
 // Start the countdown updater
 setInterval(updateCountdowns, 1000);
