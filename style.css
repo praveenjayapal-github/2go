@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
+  background: linear-gradient(to right, #79868a, #82b2ee);
   margin: 0;
   padding: 20px;
   color: #333;
@@ -20,7 +20,12 @@ h1 {
   color: #0072ff;
   margin-bottom: 20px;
 }
-
+#liveTime {
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: right;
+}
 .tabs {
   display: flex;
   margin-bottom: 15px;
@@ -39,11 +44,21 @@ h1 {
   transition: background 0.3s, color 0.3s;
 }
 
-.tab-button.active {
+.tab-button.active{
   background: #ff9800;
   color: white;
   box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
 }
+
+.timeCounter {
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.5s ease;
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
 
 .tab-content {
   display: none;
