@@ -112,7 +112,7 @@ function updateCountdowns() {
 
       // 🔔 Play bell at exactly 60 seconds
       if (seconds === 60 && !counter.dataset.bellPlayed) {
-        playBell();
+        // playBell();
         counter.dataset.bellPlayed = "true"; // mark as played
       }
 
